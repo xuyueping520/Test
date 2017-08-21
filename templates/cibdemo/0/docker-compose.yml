@@ -1,0 +1,35 @@
+oracledb:
+  ports:
+  - 49160:22
+  - 49161:1521
+  environment:
+    ORACLE_ALLOW_REMOTE: true
+  restart: always
+  tty: true
+  image: winhong/oracle-xe-11g:v3
+  stdin_open: true
+wlslb:
+  ports:
+  - 17001:7001
+  tty: true
+  image: rancher/load-balancer-service
+  links:
+  - wlssvc:wlssvc
+  stdin_open: true
+wlssvc:
+  environment:
+    APPLICATION_NAME: ${application_name}
+    ARTIFACT_URL: ${artifact_url}
+    ARTIFACT_PATH: "/workspace/${application_name}.war"
+    DATASOURCE_NAME: ""
+    DATABASE_HOST: "oracledb"
+    DATABASE_USERNAME: ""
+    DATABASE_PASSWORD: ""
+  labels:
+    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$$$${stack_name}/$$$${service_name}
+    io.rancher.container.pull_image: always
+  tty: true
+  image: winhong/wls:v1.0.0
+  stdin_open: true
+  links:
+  - oracledb:oracledb

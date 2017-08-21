@@ -1,0 +1,6 @@
+name: Winhong WinGrow CICD
+description: |
+  WinGrow ,a cicd system.
+  include gitlab,sonar and an example maven project
+version: v0.1.0
+category: cicd

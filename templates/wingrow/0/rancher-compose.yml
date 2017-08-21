@@ -1,0 +1,25 @@
+.catalog:
+  name: "WinGrow cicd"
+  version: "v0.1.1"
+  description: "WinGrow system"
+  questions:
+  - variable: "Docker_registry_ip"
+    label: "Docker registry  IP"
+    description: "LB Address of the Docker registry"
+    default: "0.0.0.0"
+    required: false
+    type: "string"
+services:
+  WinGrow:
+    scale: 1
+    start_on_create: true
+  dockerregistry:
+    external_ips:
+    - ${Docker_registry_ip}
+    start_on_create: true
+  gitlab:
+    scale: 1
+    start_on_create: true
+  sonar:
+    scale: 1
+    start_on_create: true

@@ -1,0 +1,41 @@
+version: '2'
+services:
+  jenkins:
+    privileged: true
+    image: winhong/jenkins-dind:v3.6
+    ports: 
+    - "${JenkinsPort}:8080"
+    links:
+    - sonar:SonarHost
+    volumes:
+    - /var/lib/jenkins
+    - /root/.m2:/root/.m2
+    labels: 
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: usage=app
+    stdin_open: true
+    tty: true
+  sonar:
+    image: winhong/sonarqube:5.5
+    ports: 
+    - "${SonarPort}:9000"
+    labels: 
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: usage=app
+    stdin_open: true
+    tty: true
+  gitlab: 
+    image: winhong/gitlab-ce:8.16.3-ce.1
+    ports: 
+    - "${GitlabHttpPort}:80"
+    - "${GitlabHttpsPort}:443"
+    - "${GitlabSSHPort}:22"
+    volumes:
+    - ${volume_gitlab_config}:/etc/gitlab
+    - ${volume_gitlab_log}:/var/log/gitlab
+    - ${volume_gitlab_data}:/var/opt/gitlab
+    labels: 
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: usage=app
+    stdin_open: true
+    tty: true

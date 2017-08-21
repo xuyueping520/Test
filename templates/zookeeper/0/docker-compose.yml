@@ -1,0 +1,16 @@
+version: '2'
+services:
+   zookeeper:
+    image: winhong/zookeeper-rancher-net-hos:3.4.8
+    environment:
+      SERVICE: zookeeper
+      STACK: zookeeper
+    stdin_open: true
+    network_mode: host
+    tty: true
+    ports:
+    - 2181:2181/tcp
+    labels:
+      io.rancher.scheduler.affinity:host_label: zookeeper=yes
+      io.rancher.container.dns: 'true'
+      io.rancher.container.pull_image: always

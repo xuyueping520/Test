@@ -1,0 +1,23 @@
+.catalog:
+  name: "BTPServer"
+  version: "v0.1"
+  description: "Primeton BTP Server"
+  uuid: primeton btpserver
+  minimum_rancher_version: v0.51.0
+  questions:    
+    - variable: "public_port"
+      type: "int"
+      required: true
+      default: "9898"
+      label: "Public Port"
+      description: "Port that the load balancer will listen on. Must be accessible to remote driver for webhooks"
+oracle:
+  scale: 1
+btpserver:
+  upgrade_strategy:
+    start_first: true
+  scale: 1
+btpserverlb:
+  scale: 1
+  load_balancer_config:
+  name: btpserverlb config

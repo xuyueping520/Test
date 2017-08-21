@@ -1,0 +1,48 @@
+.catalog:
+  name: "winhong cicd"
+  version: "v0.1.0"
+  description: "Jenkins-sonar-gitlab cicd"
+  questions:
+    - variable: "JenkinsPort"
+      description: "Jenkins run port in the host"
+      label: "Jenkins Port Number"
+      type: "int"
+      required: true
+      default: 8080
+    - variable: "SonarPort"
+      description: "Sonar run port in the host"
+      label: "Sonar Port Number"
+      type: "int"
+      required: true
+      default: 9000
+    - variable: "GitlabHttpPort"
+      description: "Gitlab run port in the host"
+      label: "Gitlab Http Port"
+      type: "int"
+      required: true
+      default: 180
+    - variable: "GitlabHttpsPort"
+      description: "Gitlab run port in the host"
+      label: "Gitlab Https Port"
+      type: "int"
+      default: 443
+    - variable: "GitlabSSHPort"
+      description: "Gitlab run port in the host"
+      label: "Gitlab SSH Port"
+      type: "int"
+      default: 22
+    - variable: "volume_gitlab_config"
+      description: "Gitlab Config Path"
+      label: "Gitlab Config Path"
+      type: "string"
+      default: "/srv/gitlab/config"
+    - variable: "volume_gitlab_log"
+      description: "Gitlab Log Path"
+      label: "Gitlab Log Path"
+      type: "string"
+      default: "/srv/gitlab/logs"
+    - variable: "volume_gitlab_data"
+      description: "Gitlab Data Path"
+      label: "Gitlab Data Path"
+      type: "string"
+      default: "/srv/gitlab/Data"

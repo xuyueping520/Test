@@ -1,0 +1,29 @@
+version: '2'
+services:
+  WinGrow:
+    privileged: true
+    image: winhong/wingrow-cib:20170611
+    stdin_open: true
+    tty: true
+    links:
+    - sonar:sonar
+    ports:
+    - 8080:18080/tcp
+    - 28080:8080/tcp
+  dockerregistry:
+    image: rancher/external-service
+  gitlab:
+    image: winhong/gitlab-data
+    stdin_open: true
+    tty: true
+    ports:
+    - 122:22/tcp
+    - 1443:443/tcp
+    - 180:80/tcp
+    user: root
+  sonar:
+    image: winhong/sonarqube:5.5
+    stdin_open: true
+    tty: true
+    ports:
+    - 9000:9000/tcp

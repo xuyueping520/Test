@@ -1,0 +1,29 @@
+.catalog:
+  name: "Keepalived for Rancher"
+  version: 0.1
+  description: |
+    Keepalived for Rancher HA-Proxy Loadbalancer
+  questions:
+    - variable: "virtual_ip"
+      type: string
+      required: true
+      label: "Virtual Floating IP Address"
+      description: "Virtual IP address given to the HA-Proxy Cluster"
+    - variable: "netmask_bit"
+      type: string
+      required: true
+      label: "Netmask Bit"
+      description: "Network mask bits for the Virtual IP address"
+      default: "16"
+    - variable: "check_port"
+      type: string
+      required: true
+      label: "Listening port"
+      description: "The listening port of the HA-Proxy loadbalancer"   
+      default: "80"
+    - variable: "network_interface"
+      type: string
+      required: true
+      label: "Network Interface"
+      description: "Network Interface of the Virtual Floating IP address (Host NIC)"
+      default: "eno16777984"

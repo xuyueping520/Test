@@ -1,0 +1,5 @@
+name: elasticsearch 5.3.1
+description: |
+  elasticsearch 5 with docker log and systemd log collect,kibana
+version: v5.3.1
+category: elasticsearch5

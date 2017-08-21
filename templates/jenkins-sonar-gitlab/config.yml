@@ -1,0 +1,5 @@
+name: Winhong CICD
+description: |
+  jenkins-sonar-gitlab cicd
+version: v0.1.0
+category: cicd

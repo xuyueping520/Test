@@ -1,0 +1,6 @@
+name: CIB WebLogic11g
+description: |
+  CIB WebLogic应用服务器集群.
+version: 1.0.0
+category: web
+maintainer: "航天云宏"

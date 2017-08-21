@@ -1,0 +1,69 @@
+version: '2'
+.catalog:
+  name: "Prometheus"
+  version: "3.0.0"
+  description: "Prometheus Monitoring Solution"
+  uuid: prometheus-winhong
+  minimum_rancher_version: v1.5.5
+  questions:
+  - variable: "RANCHER_SERVER_HAPROXY_IP"
+    label: "Rancher Server LB IP"
+    description: "LB Address of the rancher server, no HTTP or slashes. This is only required for users that have enabled metrics to be exported by Rancher"
+    default: "0.0.0.0"
+    required: false
+    type: "string"
+  - variable: "RANCHER_SERVER_REAL_IP_1"
+    label: "Rancher Server ip 1"
+    description: "IP Address of the rancher server"
+    default: "0.0.0.0"
+    required: true
+    type: "string"  
+  - variable: "RANCHER_SERVER_REAL_IP_2"
+    label: "Rancher Server ip 2"
+    description: "IP Address of the rancher server"
+    default: "0.0.0.0"
+    required: true
+    type: "string"      
+services:
+  node-exporter:
+    start_on_create: true
+  grafana:
+    scale: 1
+    start_on_create: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 5000
+      port: 3000
+      unhealthy_threshold: 3
+      interval: 5000
+      strategy: recreate
+  rancher-server-ip:
+    external_ips:
+    - ${RANCHER_SERVER_REAL_IP_1}
+    - ${RANCHER_SERVER_REAL_IP_2}
+    start_on_create: true
+  cadvisor:
+    start_on_create: true
+  prometheus-rancher-exporter:
+    scale: 1
+    start_on_create: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 5000
+      port: 9173
+      unhealthy_threshold: 3
+      interval: 5000
+      strategy: recreate
+  prometheus:
+    scale: 1
+    start_on_create: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 5000
+      port: 9090
+      unhealthy_threshold: 3
+      interval: 5000
+      strategy: recreate
+  graf-db:
+    scale: 1
+    start_on_create: true

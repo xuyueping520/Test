@@ -1,0 +1,51 @@
+version: '2'
+services:
+  hadoop-secondname:
+    image: cib-poc/icmp-hadoop-rancher-net-host:2.8.0
+    environment:
+      SERVICE: hadoop-secondname
+    stdin_open: true
+    network_mode: host
+    tty: true
+    ports:
+    - 50090:50090/tcp
+    - 8040:8040/tcp
+    labels:
+      io.rancher.scheduler.affinity:host_label: hadoop_usage=secondname
+      io.rancher.container.pull_image: always
+      io.rancher.container.dns: 'true'
+  hadoop-master:
+    image: cib-poc/icmp-hadoop-rancher-net-host:2.8.0
+    environment:
+      SERVICE: hadoop-master
+    stdin_open: true
+    network_mode: host
+    tty: true
+    ports:
+    - 9000:9000/tcp
+    - 50070:50070/tcp
+    - 8088:8088/tcp
+    - 8030:8030/tcp
+    - 8031:8031/tcp
+    - 8032:8032/tcp
+    - 8033:8033/tcp
+    labels:
+      io.rancher.scheduler.affinity:host_label: hadoop_usage=namenode
+      io.rancher.container.pull_image: always
+      io.rancher.container.dns: 'true'
+  hadoop-datanode:
+    image: cib-poc/icmp-hadoop-rancher-net-host:2.8.0
+    environment:
+      SERVICE: hadoop-datanode
+    stdin_open: true
+    network_mode: host
+    tty: true
+    ports:
+    - 50075:50075/tcp
+    - 50010:50010/tcp
+    - 50020:50020/tcp
+    labels:
+      io.rancher.scheduler.affinity:host_label: hadoop_usage=datanode
+      io.rancher.container.pull_image: always
+      io.rancher.container.dns: 'true'
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=icmp-hadoop/hadoop-datanode

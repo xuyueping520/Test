@@ -1,0 +1,65 @@
+.catalog:
+  name: "Elasticsearch"
+  version: "5.3.1"
+  description: "云宏定制版本，采集docker log 及systemd log，要求docker 日志采用json-file 模式"
+  services:
+  dockerlog-fluentd:
+    start_on_create: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 24224
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      reinitializing_timeout: 60000
+  elasticsearch-clients:
+    scale: 1
+    start_on_create: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 9200
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      reinitializing_timeout: 60000
+  systemd-fluentd:
+    start_on_create: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 24224
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      reinitializing_timeout: 60000
+  kibana-5:
+    scale: 1
+    start_on_create: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 5601
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      reinitializing_timeout: 60000
+  elasticsearch-masters:
+    scale: 1
+    start_on_create: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 9200
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      reinitializing_timeout: 60000
+
+

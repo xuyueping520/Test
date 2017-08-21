@@ -1,0 +1,5 @@
+name: zookeeper of icmp
+description: |
+  zookeeper run in net-host mode
+version: 3.4.8
+category: icmp

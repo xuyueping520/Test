@@ -1,0 +1,5 @@
+name: Hadoop of icmp
+description: |
+  hadoop running on net-host and use icmp customized jar
+version: 2.8.0
+category: icmp

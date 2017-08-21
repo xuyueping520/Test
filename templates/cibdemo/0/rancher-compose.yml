@@ -1,0 +1,33 @@
+.catalog:
+  name: "CIB WebLogic11g demo"
+  version: "1.0.0"
+  description: "CIB Oracle WebLogic 11g with your application deployed"
+  questions:
+    - variable: application_name
+      label: "Application Name(Please set the same as warname)"
+      type: "string"
+      required: true
+      default: "demo"
+    - variable: artifact_url
+      label: "Url to Download War Package"
+      type: "string"
+      required: true
+      default: "http://192.168.101.70/download/demo.war"
+wlslb:
+  scale: 1
+  load_balancer_config:
+    lb_cookie_stickiness_policy:
+      cookie: wlscookie
+      domain: ''
+      mode: insert
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
+oracle:
+  scale: 1
+wlssvc:
+  scale: 2
